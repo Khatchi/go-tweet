@@ -1,8 +1,15 @@
 package user
 
-import "database/sql"
+import (
+	"context"
+	"database/sql"
+
+	"github.com/Khatchi/go-tweet/internal/model"
+)
 
 type UserRepository interface {
+	GetUserByEmailOrUsername(ctx context.Context, email, username string) (*model.UserModel, error)
+	CreateUser(ctx context.Context, model *model.UserModel) (int64, error)
 }
 
 type userRepository struct {

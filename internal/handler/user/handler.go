@@ -18,5 +18,6 @@ func NewHandler(api *gin.Engine, userService user.UserService) *Handler {
 }
 
 func (h *Handler) RouteList() {
-
+	authRoute := h.api.Group("/auth")
+	authRoute.POST("/register", h.Register)
 }
