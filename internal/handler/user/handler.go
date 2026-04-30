@@ -23,4 +23,5 @@ func NewHandler(api *gin.Engine, validate *validator.Validate, userService user.
 func (h *Handler) RouteList() {
 	authRoute := h.api.Group("/auth")
 	authRoute.POST("/register", h.Register)
+	authRoute.POST("/login", h.Login)
 }

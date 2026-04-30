@@ -100,6 +100,7 @@ CREATE TABLE `refresh_tokens` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `refresh_token` text NOT NULL,
+  `expired_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -164,5 +165,6 @@ INSERT INTO `schema_migrations` (version) VALUES
   ('20260427150128'),
   ('20260427151023'),
   ('20260427152359'),
-  ('20260427152744');
+  ('20260427152744'),
+  ('20260430155222');
 UNLOCK TABLES;
