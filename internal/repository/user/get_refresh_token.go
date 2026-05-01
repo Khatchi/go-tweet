@@ -21,8 +21,6 @@ func (r *userRepository) GetRefreshToken(ctx context.Context, userID int64, now 
 		&result.UserID,
 		&result.RefreshToken,
 		&result.ExpiredAt,
-		result.CreatedAt,
-		&result.UpdatedAt,
 	)
 
 	if err != nil {
