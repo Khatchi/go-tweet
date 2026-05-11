@@ -1,0 +1,25 @@
+package post
+
+import (
+	"context"
+
+	"github.com/Khatchi/go-tweet/internal/config"
+	"github.com/Khatchi/go-tweet/internal/dto"
+	"github.com/Khatchi/go-tweet/internal/repository/post"
+)
+
+type PostService interface {
+	CreatePost(ctx context.Context, req *dto.CreatePostRequest, userID int64) (int64, int, error)
+}
+
+type postService struct {
+	cfg      *config.Config
+	postRepo post.PostRepository
+}
+
+func NewPostService(cfg *config.Config, postRepo post.PostRepository) PostService {
+	return &postService{
+		cfg:      cfg,
+		postRepo: postRepo,
+	}
+}

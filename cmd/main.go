@@ -6,8 +6,11 @@ import (
 	"net/http"
 
 	"github.com/Khatchi/go-tweet/internal/config"
+	postHandler "github.com/Khatchi/go-tweet/internal/handler/post"
 	userHandler "github.com/Khatchi/go-tweet/internal/handler/user"
+	postRepo "github.com/Khatchi/go-tweet/internal/repository/post"
 	userRepo "github.com/Khatchi/go-tweet/internal/repository/user"
+	postService "github.com/Khatchi/go-tweet/internal/service/post"
 	userService "github.com/Khatchi/go-tweet/internal/service/user"
 	"github.com/Khatchi/go-tweet/pkg/internalsql"
 	"github.com/gin-gonic/gin"
@@ -38,9 +41,16 @@ func main() {
 	})
 
 	userRepo := userRepo.NewRepository(db)
+	postRepo := postRepo.NewPostRepository(db)
+
 	userService := userService.NewService(cfg, userRepo)
+	postService := postService.NewPostService(cfg, postRepo)
+
 	userHandler := userHandler.NewHandler(r, validate, userService)
+	postHandler := postHandler.NewHandler(r, validate, postService)
+
 	userHandler.RouteList(cfg.SecretJwt)
+	postHandler.RouteList(cfg.SecretJwt)
 
 	server := fmt.Sprintf("127.0.0.1:%s", cfg.Port)
 	r.Run(server)
