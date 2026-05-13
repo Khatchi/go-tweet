@@ -10,7 +10,7 @@ import (
 func (h *Handler) CreatePost(c *gin.Context) {
 	var (
 		ctx = c.Request.Context()
-		req dto.CreatePostRequest
+		req dto.CreateOrUpdatePostRequest
 	)
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -36,7 +36,7 @@ func (h *Handler) CreatePost(c *gin.Context) {
 		return
 	}
 
-	c.JSON(statusCode, dto.CreatePostResponse{
+	c.JSON(statusCode, dto.CreateOrUpdatePostResponse{
 		ID: postID,
 	})
 
