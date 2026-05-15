@@ -25,5 +25,6 @@ func (h *Handler) RouteList(secretKey string) {
 	routeAuth := h.api.Group("/tweets")
 	routeAuth.Use(middleware.AuthMiddleware(secretKey))
 	routeAuth.POST("/", h.CreatePost)
+	routeAuth.PUT("/:post_id/update", h.UpdatePost)
 
 }

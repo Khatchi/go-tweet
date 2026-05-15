@@ -11,7 +11,7 @@ func (r *postRepository) UpdatePost(ctx context.Context, model *model.PostModel,
 	query := `UPDATE posts SET title = ?, content = ?, updated_at = ?
 		WHERE id = ?`
 
-	result, err := r.db.ExecContext(ctx, query, model.Title, model.Content, model.CreatedAt, model.UpdatedAt)
+	result, err := r.db.ExecContext(ctx, query, model.Title, model.Content, model.UpdatedAt, postID)
 	if err != nil {
 		return err
 	}
